@@ -1,0 +1,186 @@
+/* RESET (simple) */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background-color: #f5f5f5;
+  color: #222;
+}
+
+/* ===== TOP BAR ===== */
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 32px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e3e3e3;
+}
+
+.restaurant-info h1 {
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.restaurant-meta span {
+  font-size: 13px;
+  color: #666;
+  margin-right: 8px;
+}
+
+.search-box input {
+  width: 320px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+/* ===== MAIN LAYOUT ===== */
+
+.main-layout {
+  display: flex;          /* sidebar + content side by side */
+  padding: 16px 32px;
+  gap: 24px;
+}
+
+/* ===== SIDEBAR ===== */
+
+.sidebar {
+  width: 220px;
+}
+
+.sidebar-title {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.sidebar-time {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 16px;
+}
+
+.menu-list {
+  position: sticky;
+  top: 80px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 8px; 
+}
+
+.menu-item {
+  font-size: 14px;
+  text-decoration: none;
+  color: #555;
+  padding: 6px 0;
+}
+
+.menu-item.active {
+  font-weight: 600;
+  color: #000;
+  border-left: 3px solid #000;
+  padding-left: 8px;
+}
+
+/* ===== CONTENT AREA ===== */
+
+.content {
+  flex: 1;               /* take remaining space */
+}
+
+/* a row that holds 2 cards */
+.card-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+/* ===== DISH CARD ===== */
+
+.dish-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 12px 12px 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.dish-text {
+  flex: 1;
+  padding-right: 12px;
+}
+
+.dish-title {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.dish-desc {
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.dish-meta {
+  font-size: 13px;
+  color: #444;
+}
+
+.dish-meta .price {
+  font-weight: 600;
+}
+
+.dish-meta .dot {
+  margin: 0 6px;
+}
+
+/* image + plus button container */
+.dish-image-wrapper {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* the dish image */
+.dish-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;        /* THIS makes image look shaped and not stretched */
+}
+html{
+    scroll-behavior: smooth;
+}
+
+.menu-item.active {
+  font-weight: bold;
+  color: #d60000;
+}
+
+
+/* circular + button */
+.add-btn {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  font-size: 20px;
+  line-height: 0;
+  cursor: pointer;
+  background-color: #ffffff;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+}
