@@ -184,3 +184,66 @@ html{
   background-color: #ffffff;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
 }
+/* ===== MOBILE VIEW FIX (screens below 768px) ===== */
+@media (max-width: 768px) {
+
+  /* stack items vertical instead of side-by-side */
+  .main-layout {
+    flex-direction: column;
+    padding: 12px 16px;
+  }
+
+  /* sidebar becomes horizontal scroll */
+  .sidebar {
+    width: 100%;
+  }
+
+  .menu-list {
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 10px;
+    padding-bottom: 8px;
+  }
+
+  .menu-item {
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+
+  .menu-item.active {
+    border-color: #d60000;
+    background: #d60000;
+    color: #fff;
+  }
+
+  /* search box full width */
+  .search-box input {
+    width: 100%;
+  }
+
+  /* card: one item per row */
+  .card-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  /* image smaller on mobile */
+  .dish-image-wrapper {
+    width: 110px;
+    height: 110px;
+  }
+
+  /* reduce description text a little for mobile readability */
+  .dish-desc {
+    font-size: 12px;
+  }
+
+  .top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 12px 16px;
+  }
+}
