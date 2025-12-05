@@ -246,4 +246,76 @@ html{
     gap: 8px;
     padding: 12px 16px;
   }
+
+  .order-bar{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    background: #ff5a26;
+    color: #fff;
+    padding: 8px 12px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    box-shadow: 0 -2px 8pxrgba(0,0,0,0.2);
+  }
+
+  .order-link {
+    flex: 1;
+    background-color: #ffffff55;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+    padding: 8px 10px;
+    cursor:pointer;
+    border-radius: 999px;
+    border: 1px solid #ffffff55;
+    white-space: nowrap;
+  }
+  .order-link : :hover{
+    background: #ffffff33;
+  }
+  cart{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    background: #ff5a26;
+    color: #fff;
+    padding: 8px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
+
+  }
+
+  .order-info{
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .dish-meta .spcl-item {
+  font-size: 12px;
+  color: #666;
+  background: #f0f0f0;
+  padding: 3px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.dish-meta .price {
+  font-weight: 600;
+  font-size: 16px;
+  color: #d32f2f; /* red tone */
+}
+
 }
