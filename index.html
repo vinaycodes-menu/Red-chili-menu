@@ -344,6 +344,7 @@
                 </p>
                 <p class="dish-meta">
                   <span class="price">$ 10</span>
+                  <span class="spcl-item">Available only on Saturdays & Sundays</span>
                 </p>
               </div>
               <div class="dish-image-wrapper">
@@ -364,11 +365,12 @@
                 </p>
                 <p class="dish-meta">
                   <span class="price">$ 10</span>
+                  <span class="spcl-item">Available only on Saturdays & Sundays</span>
                 </p>
               </div>
               <div class="dish-image-wrapper">
                 <img src="photos/chatti choru.jpeg" alt="Chatti Choru" />
-                <button>+</button>
+                <button class="add-btn">+</button>
               </div>
             </article>
           </section>
@@ -511,44 +513,139 @@ Flavorful chicken curry served with soft chapathis for a wholesome, homestyle me
       </section>
       </main>
     </div>
-    <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // All sections that have an id (biryani-section, curry-items, week-end, combo-section)
-    const sections = document.querySelectorAll("section[id]");
-    // All sidebar menu links that point to a #id
-    const menuLinks = document.querySelectorAll(".menu-list .menu-item[href^='#']");
+        <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        /* ========== 1. SECTION HIGHLIGHT ON SCROLL ========== */
+        const sections = document.querySelectorAll("section[id]");
+        const menuLinks = document.querySelectorAll(".menu-list .menu-item[href^='#']");
 
-    function onScroll() {
-      let currentId = null;
+        function onScroll() {
+          let currentId = null;
+          const marker = 150;
 
-      // Check which section is currently around the top of the screen
-      sections.forEach((section) => {
-        const rect = section.getBoundingClientRect();
-        // 150px from the top of the screen – you can change this number later
-        const marker = 150;
+          sections.forEach((section) => {
+            const rect = section.getBoundingClientRect();
+            if (rect.top <= marker && rect.bottom > marker) {
+              currentId = section.id;
+            }
+          });
 
-        if (rect.top <= marker && rect.bottom > marker) {
-          currentId = section.id;
+          if (!currentId) return;
+
+          menuLinks.forEach((link) => {
+            const href = link.getAttribute("href");
+            if (href === "#" + currentId) {
+              link.classList.add("active");
+            } else {
+              link.classList.remove("active");
+            }
+          });
+        }
+
+        window.addEventListener("scroll", onScroll);
+        onScroll();
+
+        menuLinks.forEach((link) => {
+          link.addEventListener("click", function () {
+            menuLinks.forEach((l) => l.classList.remove("active"));
+            this.classList.add("active");
+          });
+        });
+
+        /* ========== 2. SIMPLE CART + WHATSAPP ORDER ========== */
+        const cart = []; // will store { name, price }
+
+        const addButtons = document.querySelectorAll(".add-btn");
+        const cartCountEl = document.querySelector(".cart-count");
+        const cartTotalEl = document.querySelector(".cart-total");
+        const whatsappBtn = document.querySelector(".whatsapp-order-btn");
+
+        function updateCartUI() {
+          const totalItems = cart.length;
+          const totalAmount = cart.reduce((sum, item) => sum + item.price, 0);
+
+          cartCountEl.textContent = totalItems;
+          cartTotalEl.textContent = totalAmount.toFixed(2);
+        }
+
+        addButtons.forEach((btn) => {
+          btn.addEventListener("click", function () {
+            const card = this.closest(".dish-card");
+            if (!card) return;
+
+            const nameEl = card.querySelector(".dish-title");
+            const priceEl = card.querySelector(".price");
+
+            if (!nameEl || !priceEl) return;
+
+            const name = nameEl.textContent.trim();
+            const rawPrice = priceEl.textContent.replace("$", "").trim();
+            const price = parseFloat(rawPrice);
+
+            if (isNaN(price)) return;
+
+            cart.push({ name, price });
+            updateCartUI();
+          });
+        });
+
+        if (whatsappBtn) {
+          whatsappBtn.addEventListener("click", function () {
+            if (cart.length === 0) {
+              alert("Please add at least one item to the cart before sending the order.");
+              return;
+            }
+
+            let lines = [];
+            lines.push("Hi, I would like to order from Red Chili:");
+            lines.push(""); // blank line
+
+            let totalAmount = 0;
+
+            cart.forEach((item, index) => {
+              totalAmount += item.price;
+              lines.push(`${index + 1}) ${item.name} - $${item.price.toFixed(2)}`);
+            });
+
+            lines.push("Estimated preparation time: 15 minutes");
+            lines.push(`Total: $${totalAmount.toFixed(2)}`);
+            lines.push("");
+            lines.push("Name:");
+            lines.push("Phone:");
+            lines.push("Pickup time:");
+
+            const message = lines.join("\n");
+
+            // ✅ YOUR WHATSAPP NUMBER HERE (DIGITS ONLY, NO +, NO SPACES)
+            const phoneNumber = "19724409333"; // example: +1 972-203-8182
+
+            const waUrl = "https://wa.me/" + phoneNumber + "?text=" + encodeURIComponent(message);
+            window.open(waUrl, "_blank");
+          });
         }
       });
+    </script>
 
-      if (!currentId) return;
+    <!-- ORDER / CART BAR -->
+    <div class="order-bar">
+      <div class="order-info">
+        Items: <span class="cart-count">0</span> &nbsp; | &nbsp;
+        Total: $<span class="cart-total">0.00</span>
+      </div>
 
-      // Highlight the correct menu link
-      menuLinks.forEach((link) => {
-        const href = link.getAttribute("href"); // like "#combo-section"
-        if (href === "#" + currentId) {
-          link.classList.add("active");
-        } else {
-          link.classList.remove("active");
-        }
-      });
-    }
+      <button class="order-link whatsapp-order-btn">
+        💬 Send Order on WhatsApp
+      </button>
+    </div>
 
-    window.addEventListener("scroll", onScroll);
-    onScroll(); // run once on load
-  });
-</script>
+  </body>
+</html>
+
+
+
+
+
+
 
  
 
